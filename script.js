@@ -8,10 +8,16 @@ function book(title, author, pages, read) {
   this.read = read;
 }
 function addBook() {
-  const title = prompt("Ingrese el nombre");
-  const author = prompt("Ingrese el nombre del autor");
-  const pages = prompt("Ingrese la cantidad de paginas");
-  const read = prompt("Ingrese si lo leyo");
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = document.querySelector("#pages").value;
+  const radio = document.querySelectorAll("input[type='radio']");
+  let read = "";
+  for (let i of radio) {
+    if (i.checked) {
+      read = i.value;
+    }
+  }
   myLibrary.push(new book(title, author, pages, read));
   displayBook(myLibrary[myLibrary.length - 1]);
 }
@@ -34,4 +40,20 @@ function displayBook(i) {
 }
 
 const boton = document.querySelector(".boton");
-boton.addEventListener("click", addBook);
+const dialog = document.querySelector("dialog");
+const cancel = document.getElementById("cancel");
+boton.addEventListener("click", () => {
+  dialog.showModal();
+});
+cancel.addEventListener("click", (e) => {
+  e.preventDefault();
+  dialog.close();
+});
+
+const myform = document.querySelector("#myform");
+myform.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addBook();
+  myform.reset();
+  dialog.close();
+});
