@@ -1,25 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+}
 body {
   display: grid;
   grid-template-columns: 1.5fr 4fr 1.5fr;
   grid-template-rows: 100px 5fr;
   gap: 20px;
+  background-color: rgb(255, 255, 188);
 }
 header {
-  grid-area: 1/2/2/3;
+  grid-area: 1/1/2/4;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  background-color: rgb(230, 197, 154);
 }
 main {
   grid-area: 2/2/3/3;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 50px;
+  align-content: start;
 }
 .card {
   height: 200px;
-  width: 300px;
-  background-color: aquamarine;
-  border: 2px solid black;
+  width: 200px;
+  background-color: rgb(77, 204, 149);
+  border: 2px solid rgb(129, 21, 21);
   border-radius: 10px;
-  border-left: 10px solid blue;
+  border-left: 10px solid rgb(129, 21, 21);
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.boton {
+  height: 50px;
+  border-radius: 10px;
+  padding: 10px 30px;
+  border: none;
+  background-color: rgb(94, 138, 125);
+  color: white;
+  font-size: medium;
+}
+.botones button:hover,
+.boton:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  box-shadow: 2px 2px 2px 1px rgba(41, 89, 194, 0.4);
+}
+main dialog {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  border: none;
+  background-color: transparent;
+}
+#myform {
+  padding: 20px;
+  border: none;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  border: 2px solid rgb(136, 133, 133);
+  align-items: flex-end;
+}
+input[type="text"],
+input[type="number"] {
+  background-color: rgba(149, 173, 165, 0.952);
+  border: none;
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+input[type="text"]:focus-visible,
+input[type="number"]:focus-visible {
+  border: none;
+  outline: none;
+}
+.leido {
+  border: none;
+  align-self: flex-start;
+}
+.ops {
+  width: 100%;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+.botones {
+  align-self: center;
+  display: flex;
+  gap: 30px;
+}
+.botones button {
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(24, 162, 226);
+  color: rgb(255, 255, 255);
+  font-size: medium;
 }
