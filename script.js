@@ -1,4 +1,8 @@
 const main = document.getElementById("main");
+const boton = document.querySelector(".boton");
+const dialog = document.querySelector("dialog");
+const cancel = document.getElementById("cancel");
+const myform = document.querySelector("#myform");
 
 const myLibrary = [];
 function book(title, author, pages, read) {
@@ -23,11 +27,13 @@ function addBook() {
 }
 function displayBook(i) {
   const div = document.createElement("div");
-  div.className = "card";
   const h3 = document.createElement("h3");
   const h4 = document.createElement("h4");
   const p = document.createElement("p");
   const p2 = document.createElement("p");
+  const borrar = document.createElement("button");
+  div.className = "card";
+  div.dataset.index = myLibrary.length - 1;
   h3.textContent = `${i.title}`;
   div.appendChild(h3);
   h4.textContent = `${i.author}`;
@@ -36,12 +42,23 @@ function displayBook(i) {
   div.appendChild(p);
   p2.textContent = `${i.read}`;
   div.appendChild(p2);
+  borrar.textContent = "Delete";
+  borrar.className = "borrar";
+  borrar.addEventListener("click", buttonDelete);
+  div.appendChild(borrar);
   main.appendChild(div);
 }
-
-const boton = document.querySelector(".boton");
-const dialog = document.querySelector("dialog");
-const cancel = document.getElementById("cancel");
+function buttonDelete(e) {
+  const carta = e.currentTarget.parentNode;
+  myLibrary.splice(carta.dataset.index, 1);
+  carta.remove();
+  const divs = document.querySelectorAll(".card");
+  for (let i of divs) {
+    if (i.dataset.index > carta.dataset.index) {
+      i.dataset.index = i.dataset.index - 1;
+    }
+  }
+}
 boton.addEventListener("click", () => {
   dialog.showModal();
 });
@@ -50,7 +67,6 @@ cancel.addEventListener("click", (e) => {
   dialog.close();
 });
 
-const myform = document.querySelector("#myform");
 myform.addEventListener("submit", (e) => {
   e.preventDefault();
   addBook();
