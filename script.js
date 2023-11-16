@@ -11,6 +11,13 @@ function book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
 }
+book.prototype.changeRead = function () {
+  if (this.read == "Read") {
+    this.read = "Not read";
+  } else {
+    this.read = "Read";
+  }
+};
 function addBook() {
   const title = document.querySelector("#title").value;
   const author = document.querySelector("#author").value;
@@ -30,9 +37,14 @@ function displayBook(i) {
   const h3 = document.createElement("h3");
   const h4 = document.createElement("h4");
   const p = document.createElement("p");
-  const p2 = document.createElement("p");
+  const readbutt = document.createElement("button");
   const borrar = document.createElement("button");
   div.className = "card";
+  if (i.read === "Read") {
+    div.classList += " read";
+  } else {
+    div.classList += " not-read";
+  }
   div.dataset.index = myLibrary.length - 1;
   h3.textContent = `${i.title}`;
   div.appendChild(h3);
@@ -40,8 +52,17 @@ function displayBook(i) {
   div.appendChild(h4);
   p.textContent = `${i.pages}`;
   div.appendChild(p);
-  p2.textContent = `${i.read}`;
-  div.appendChild(p2);
+  readbutt.textContent = `${i.read}`;
+  readbutt.className = "read-button";
+  readbutt.addEventListener("click", (e) => {
+    const selected = myLibrary[e.currentTarget.parentNode.dataset.index];
+    selected.changeRead();
+    e.currentTarget.textContent = selected.read;
+    e.currentTarget.parentNode.classList = `card ${selected.read
+      .toLowerCase()
+      .replace(" ", "-")}`;
+  });
+  div.appendChild(readbutt);
   borrar.textContent = "Delete";
   borrar.className = "borrar";
   borrar.addEventListener("click", buttonDelete);
